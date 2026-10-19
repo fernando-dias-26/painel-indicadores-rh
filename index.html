@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Painel de indicadores de RH no Excel · Fernando Henrique Almeida Dias</title><meta name="description" content="acompanhar a equipe com números e apoiar decisões de gestão.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FAFAF8;--ink:#16181A;--muted:#63666A;--line:#E3E2DD;--acc:#1F5F54;--sf:#fff;--paper:#fff}
+@media(prefers-color-scheme:dark){:root{--bg:#111315;--ink:#ECEDEE;--muted:#9A9FA5;--line:#2A2E32;--acc:#6FC4B2;--sf:#181B1E;--paper:#1F2327}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:300 17px/1.7 "IBM Plex Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.w{max-width:760px;margin:0 auto;padding:0 24px}
+header{padding:clamp(56px,12vh,110px) 0 40px}
+.k{color:var(--acc);font-size:.8rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;margin:0 0 18px}
+h1,h2{font-family:"Source Serif 4",Georgia,serif;font-weight:400;line-height:1.15;margin:0}
+h1{font-size:clamp(2rem,6vw,3.2rem);letter-spacing:-.02em}h2{font-size:1.5rem;margin-bottom:14px}
+.lead{color:var(--muted);font-size:1.15rem;max-width:34em;margin:20px 0 0}
+section{padding:36px 0;border-top:1px solid var(--line)}
+section p{margin:0;color:var(--muted)}
+ul.d{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.d a{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:16px 18px;border:1px solid var(--line);border-radius:10px;background:var(--sf);text-decoration:none;color:var(--ink);transition:border-color .2s,transform .2s}
+.d a:hover{border-color:var(--acc);transform:translateY(-2px)}
+.d b{font:500 1.05rem "Source Serif 4",Georgia,serif;display:block}.d small{color:var(--muted);font-size:.9rem;display:block;font-weight:300}
+.d span{color:var(--acc);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+dl{margin:0}dt{color:var(--acc);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;font-weight:500;margin-top:18px}dd{margin:2px 0 0;color:var(--muted)}
+footer{padding:36px 0 64px;border-top:1px solid var(--line);color:var(--muted);font-size:.92rem}footer a{color:var(--ink)}
+
+main.w{max-width:1000px}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+@media(max-width:760px){.cards{grid-template-columns:1fr}}
+.card{border:1px solid var(--line);border-radius:14px;background:var(--sf);overflow:hidden;display:flex;flex-direction:column;transition:border-color .25s,box-shadow .25s,transform .25s}
+.card:hover{border-color:var(--acc);transform:translateY(-3px);box-shadow:0 14px 34px -18px rgba(0,0,0,.35)}
+.card canvas{display:block;width:100%;background:var(--bg);border-bottom:1px solid var(--line)}
+.cb{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 18px}
+.cb b{font:500 1.05rem "Source Serif 4",Georgia,serif;display:block}.cb small{color:var(--muted);font-size:.9rem;display:block;font-weight:300;line-height:1.5;margin-top:2px}
+.cb a{flex:none;color:var(--acc);font-size:.78rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;white-space:nowrap;border:1px solid var(--acc);border-radius:999px;padding:8px 14px;transition:background .2s,color .2s}
+.cb a:hover{background:var(--acc);color:var(--bg)}
+.hint{font-size:.85rem;margin-top:14px!important}
+dl{max-width:720px}
+:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+</style></head><body>
+<header><div class="w"><p class="k">RH · Projeto</p><h1>Painel de indicadores de RH no Excel</h1><p class="lead">acompanhar a equipe com números e apoiar decisões de gestão.</p></div></header>
+<main class="w">
+<section><h2>Modelos para baixar</h2><div class="cards">
+<article class="card"><canvas id="cv-painel" role="img" aria-label="Prévia do painel de indicadores: quatro gráficos de linha (rotatividade, absenteísmo, tempo e custo de contratação) com dados de exemplo de janeiro a junho."></canvas><div class="cb"><div><b>Painel de indicadores</b><small>Rotatividade, absenteísmo, tempo e custo de contratação, com gráficos.</small></div><a href="modelos/painel-rh.xlsx" download>Baixar XLSX</a></div></article>
+<article class="card"><canvas id="cv-relatorio" role="img" aria-label="Prévia do relatório mensal: uma página com resumo dos indicadores, texto de análise e um pequeno gráfico de barras."></canvas><div class="cb"><div><b>Relatório mensal</b><small>Modelo de uma página para escrever a análise do mês.</small></div><a href="modelos/relatorio-mensal.docx" download>Baixar DOCX</a></div></article>
+</div><p class="hint">Prévias ilustrativas com os dados de exemplo da planilha. Passe o mouse sobre os gráficos do painel para ver os valores de cada mês.</p></section>
+<section><h2>Como funciona</h2><dl><dt>Etapas</dt><dd>escolher os indicadores, coletar os dados todo mês, montar fórmulas e gráficos e escrever um relatório de uma página com a análise.</dd><dt>Indicadores</dt><dd>rotatividade, absenteísmo, tempo de contratação e custo por contratação.</dd><dt>Base</dt><dd>cursos de People Analytics Aplicado ao RH (Udemy) e Excel (SENAI).</dd></dl></section>
+</main>
+<footer><div class="w">Por <a href="https://www.linkedin.com/in/fernando-hnerique-50b21b299" target="_blank" rel="noopener">Fernando Henrique Almeida Dias</a> · <a href="mailto:fh751763@gmail.com">Fale comigo</a></div></footer>
+<script>
+(()=>{
+const SERIF='"Source Serif 4",Georgia,serif',SANS='"IBM Plex Sans",system-ui,sans-serif';
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+// Dados de exemplo (os mesmos da aba "Dados" da planilha) e fórmulas dos indicadores
+const D={m:['Jan','Fev','Mar','Abr','Mai','Jun'],q:[18,19,18,20,18,20],a:[2,1,3,0,2,1],d:[1,2,1,2,0,1],f:[14,19,12,21,13,15],u:[22,20,23,21,22,21],c:[2,1,3,0,2,1],t:[21,25,18,null,20,17],k:[640,420,880,150,610,360]};
+const rot=D.q.map((q,i)=>((D.a[i]+D.d[i])/2)/q);
+const abs=D.q.map((q,i)=>D.f[i]/(q*D.u[i]));
+const cpc=D.k.map((k,i)=>D.c[i]?k/D.c[i]:null);
+const pct=v=>(v*100).toFixed(1).replace('.',',')+'%';
+const IND=[
+ {n:'Rotatividade',v:rot,f:pct},
+ {n:'Absenteísmo',v:abs,f:pct},
+ {n:'Tempo de contratação',v:D.t,f:v=>Math.round(v)+' dias'},
+ {n:'Custo por contratação',v:cpc,f:v=>'R$ '+Math.round(v)}
+];
+const avg=a=>{const x=a.filter(v=>v!=null);return x.reduce((p,c)=>p+c,0)/x.length};
+const ease=t=>1-Math.pow(1-t,3), clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const colors=()=>{const s=getComputedStyle(document.documentElement),g=n=>s.getPropertyValue(n).trim();return{ink:g('--ink'),muted:g('--muted'),line:g('--line'),acc:g('--acc'),sf:g('--sf'),bg:g('--bg'),paper:g('--paper')}};
+const alpha=(c,a)=>{const g=document.createElement('canvas').getContext('2d');g.fillStyle=c;const h=g.fillStyle;if(h[0]!=='#')return h.replace(/rgba?\(([^)]+)\)/,(m,x)=>'rgba('+x.split(',').slice(0,3).join(',')+','+a+')');const n=parseInt(h.slice(1),16);return'rgba('+(n>>16)+','+((n>>8)&255)+','+(n&255)+','+a+')'};
+function rr(g,x,y,w,h,r){g.beginPath();g.moveTo(x+r,y);g.arcTo(x+w,y,x+w,y+h,r);g.arcTo(x+w,y+h,x,y+h,r);g.arcTo(x,y+h,x,y,r);g.arcTo(x,y,x+w,y,r);g.closePath()}
+function tx(g,t,x,y,size,color,o={}){g.font=(o.w||400)+' '+size+'px '+(o.f||SANS);g.fillStyle=color;g.textAlign=o.a||'left';g.textBaseline=o.b||'alphabetic';if('letterSpacing' in g)g.letterSpacing=(o.ls||0)+'px';g.fillText(t,x,y);if('letterSpacing' in g)g.letterSpacing='0px'}
+
+// ---------- Prévia 1: painel ----------
+function painel(g,w,h,p,C,hv){
+ const s=w/520,pad=16*s;
+ rr(g,.5,.5,w-1,h-1,12*s);g.fillStyle=C.bg;g.fill();g.strokeStyle=C.line;g.lineWidth=1;g.stroke();
+ tx(g,'Painel mensal',pad,pad+16*s,17*s,C.ink,{f:SERIF,w:500});
+ tx(g,'Jan – Jun · dados de exemplo',w-pad,pad+15*s,10*s,C.muted,{a:'right'});
+ const top=pad+34*s,gap=12*s,cw=(w-2*pad-gap)/2,ch=(h-top-pad-gap)/2;
+ IND.forEach((it,k)=>{
+  const cx=pad+(k%2)*(cw+gap),cy=top+Math.floor(k/2)*(ch+gap),ip=ease(clamp(p*1.35-k*.1,0,1));
+  g.globalAlpha=clamp(ip*2,0,1);
+  rr(g,cx,cy,cw,ch,10*s);g.fillStyle=C.sf;g.fill();g.strokeStyle=C.line;g.stroke();
+  const ip2=12*s;
+  tx(g,it.n.toUpperCase(),cx+ip2,cy+19*s,8.5*s,C.muted,{w:500,ls:1.1*s});
+  tx(g,it.f(avg(it.v)),cx+ip2,cy+45*s,22*s,C.ink,{f:SERIF,w:500});
+  tx(g,'média',cx+cw-ip2,cy+43*s,9*s,C.muted,{a:'right'});
+  // gráfico
+  const x0=cx+ip2+6*s,x1=cx+cw-ip2-6*s,y0=cy+60*s,y1=cy+ch-24*s,n=it.v.length;
+  const vs=it.v.filter(v=>v!=null),mn=Math.min(...vs),mx=Math.max(...vs),pd=(mx-mn||1)*.18;
+  const X=i=>x0+i*(x1-x0)/(n-1),Y=v=>y1-((v-(mn-pd))/((mx+pd)-(mn-pd)))*(y1-y0);
+  // linhas de grade e meses
+  g.strokeStyle=alpha(C.line,.9);g.lineWidth=1;g.setLineDash([]);g.beginPath();g.moveTo(x0-6*s,y1+.5);g.lineTo(x1+6*s,y1+.5);g.stroke();
+  D.m.forEach((m,i)=>{tx(g,m,X(i),cy+ch-9*s,8*s,C.muted,{a:'center'});
+   if(it.v[i]==null){g.strokeStyle=C.line;g.setLineDash([2*s,3*s]);g.beginPath();g.moveTo(X(i),y0);g.lineTo(X(i),y1);g.stroke();g.setLineDash([])}});
+  // segmentos (quebram onde não há dado)
+  g.save();g.beginPath();g.rect(x0-8*s,cy,(x1-x0+16*s)*ip,ch);g.clip();
+  const segs=[];let cur=[];it.v.forEach((v,i)=>{if(v==null){if(cur.length)segs.push(cur);cur=[]}else cur.push(i)});if(cur.length)segs.push(cur);
+  const gr=g.createLinearGradient(0,y0,0,y1);gr.addColorStop(0,alpha(C.acc,.28));gr.addColorStop(1,alpha(C.acc,0));
+  segs.forEach(sg=>{
+   if(sg.length>1){g.beginPath();sg.forEach((i,j)=>j?g.lineTo(X(i),Y(it.v[i])):g.moveTo(X(i),Y(it.v[i])));
+    g.lineTo(X(sg[sg.length-1]),y1);g.lineTo(X(sg[0]),y1);g.closePath();g.fillStyle=gr;g.fill();
+    g.beginPath();sg.forEach((i,j)=>j?g.lineTo(X(i),Y(it.v[i])):g.moveTo(X(i),Y(it.v[i])));
+    g.strokeStyle=C.acc;g.lineWidth=2*s;g.lineJoin='round';g.lineCap='round';g.stroke()}});
+  g.restore();
+  it.v.forEach((v,i)=>{if(v==null||X(i)>x0+(x1-x0)*ip+1)return;const last=i===n-1;
+   g.beginPath();g.arc(X(i),Y(v),(last?3.6:2.6)*s,0,7);g.fillStyle=last?C.acc:C.sf;g.fill();g.strokeStyle=C.acc;g.lineWidth=1.5*s;g.stroke();
+   if(last){g.beginPath();g.arc(X(i),Y(v),7*s,0,7);g.strokeStyle=alpha(C.acc,.3);g.stroke()}});
+  g.globalAlpha=1;
+  // hover
+  if(hv&&p>=1&&hv.x>cx&&hv.x<cx+cw&&hv.y>cy&&hv.y<cy+ch){
+   let b=0,bd=1e9;for(let i=0;i<n;i++){const d=Math.abs(hv.x-X(i));if(d<bd){bd=d;b=i}}
+   g.strokeStyle=alpha(C.muted,.55);g.setLineDash([3*s,3*s]);g.beginPath();g.moveTo(X(b),y0-6*s);g.lineTo(X(b),y1);g.stroke();g.setLineDash([]);
+   const v=it.v[b];if(v!=null){g.beginPath();g.arc(X(b),Y(v),4.4*s,0,7);g.fillStyle=C.acc;g.fill();g.strokeStyle=C.sf;g.lineWidth=2*s;g.stroke()}
+   const label=D.m[b]+' · '+(v!=null?it.f(v):'sem contratações');
+   g.font='500 '+10*s+'px '+SANS;const tw=g.measureText(label).width+16*s,th=22*s;
+   let bx=clamp(X(b)-tw/2,cx+6*s,cx+cw-tw-6*s),by=(v!=null?Y(v):y0+10*s)-th-10*s;by=Math.max(by,cy+6*s);
+   g.save();g.shadowColor='rgba(0,0,0,.22)';g.shadowBlur=10*s;g.shadowOffsetY=3*s;rr(g,bx,by,tw,th,6*s);g.fillStyle=C.ink;g.fill();g.restore();
+   tx(g,label,bx+tw/2,by+th/2,10*s,C.bg,{a:'center',b:'middle',w:500});
+  }
+ });
+ g.globalAlpha=1;
+}
+
+// ---------- Prévia 2: relatório (uma página) ----------
+function relatorio(g,w,h,p,C){
+ const S=w/520;
+ rr(g,.5,.5,w-1,h-1,12*S);g.fillStyle=C.bg;g.fill();g.strokeStyle=C.line;g.lineWidth=1;g.stroke();
+ const py=h*.07,ph=h-2*py,pw=ph/1.414,px=(w-pw)/2,s=pw/300,m=22*s;
+ const lift=(1-ease(clamp(p*2.2,0,1)))*14*S;
+ // folha de trás
+ g.save();g.translate(w/2,h/2+lift);g.rotate(-.04);g.translate(-w/2,-h/2);
+ rr(g,px+6*s,py+4*s,pw,ph,4*s);g.fillStyle=C.paper;g.globalAlpha=.7;g.fill();g.globalAlpha=1;g.strokeStyle=C.line;g.stroke();g.restore();
+ // folha da frente
+ g.save();g.translate(0,lift);g.globalAlpha=clamp(p*3,0,1);
+ g.shadowColor='rgba(0,0,0,.16)';g.shadowBlur=26*s;g.shadowOffsetY=10*s;rr(g,px,py,pw,ph,4*s);g.fillStyle=C.paper;g.fill();g.shadowColor='transparent';
+ g.strokeStyle=C.line;g.lineWidth=1;g.stroke();
+ const X=px+m,W=pw-2*m;let Y=py;
+ tx(g,'RELATÓRIO MENSAL',X,Y+34*s,6.5*s,C.acc,{w:500,ls:1.4*s});
+ tx(g,'Análise de junho',X,Y+58*s,17*s,C.ink,{f:SERIF,w:500});
+ tx(g,'Resumo do mês, leitura dos números e próximos passos',X,Y+72*s,7*s,C.muted);
+ g.strokeStyle=C.line;g.beginPath();g.moveTo(X,Y+84*s);g.lineTo(X+W,Y+84*s);g.stroke();
+ // KPIs
+ const K=[['Rotatividade',pct(rot[5])],['Absenteísmo',pct(abs[5])],['Contratar',D.t[5]+' dias'],['Custo','R$ '+Math.round(cpc[5])]];
+ const kg=6*s,kw=(W-3*kg)/4;
+ K.forEach((k,i)=>{const kp=ease(clamp(p*2-.25-i*.08,0,1)),kx=X+i*(kw+kg),ky=Y+96*s;g.globalAlpha=kp;
+  rr(g,kx,ky,kw,34*s,4*s);g.fillStyle=alpha(C.acc,.07);g.fill();g.strokeStyle=alpha(C.acc,.25);g.stroke();
+  tx(g,k[1],kx+6*s,ky+16*s,10.5*s,C.ink,{f:SERIF,w:500});tx(g,k[0],kx+6*s,ky+27*s,5.6*s,C.muted)});
+ g.globalAlpha=1;
+ // blocos de texto que "se escrevem"
+ const block=(title,ty,rows,t0)=>{
+  tx(g,title,X,Y+ty,9*s,C.ink,{f:SERIF,w:500});
+  rows.forEach((r,i)=>{const e=ease(clamp((p-t0-i*.07)/.22,0,1)),yy=Y+ty+10*s+i*9*s;
+   rr(g,X,yy,W*r*e,3.4*s,1.7*s);g.fillStyle=alpha(C.muted,.38);g.fill()})};
+ block('Destaques',150*s,[1,.95,.99,.62],.30);
+ block('Análise',208*s,[.98,1,.9,.97,.45],.50);
+ // mini gráfico de barras
+ const by=Y+290*s,bh=46*s,bn=6,bw=(W*.55-(bn-1)*5*s)/bn,mxv=.12;
+ tx(g,'Rotatividade no período',X,Y+283*s,6*s,C.muted,{w:500});
+ rot.forEach((v,i)=>{const e=ease(clamp((p-.55-i*.05)/.3,0,1)),hh=(v/mxv)*bh*e;
+  rr(g,X+i*(bw+5*s),by+bh-hh+6*s,bw,Math.max(hh,.1),2*s);g.fillStyle=i===5?C.acc:alpha(C.acc,.35);g.fill()});
+ // assinatura
+ const ae=ease(clamp((p-.8)/.2,0,1));g.globalAlpha=ae;
+ g.strokeStyle=C.line;g.beginPath();g.moveTo(X,py+ph-30*s);g.lineTo(X+W,py+ph-30*s);g.stroke();
+ tx(g,'Fernando Henrique Almeida Dias',X,py+ph-17*s,6.5*s,C.muted);tx(g,'1 página',X+W,py+ph-17*s,6.5*s,C.muted,{a:'right'});
+ g.restore();
+}
+
+// ---------- montagem (DPR, redimensionamento, animação ao aparecer) ----------
+const all=[];
+function mount(id,ar,draw){
+ const cv=document.getElementById(id),g=cv.getContext('2d');let w=0,h=0,p=reduce?1:0,hv=null,started=false;
+ const render=()=>{if(!w)return;g.clearRect(0,0,w,h);draw(g,w,h,p,colors(),hv)};
+ const size=()=>{w=cv.getBoundingClientRect().width;if(!w)return;h=w/ar;const d=window.devicePixelRatio||1;cv.width=Math.round(w*d);cv.height=Math.round(h*d);cv.style.height=h+'px';g.setTransform(d,0,0,d,0,0);render()};
+ const run=()=>{if(started)return;started=true;if(reduce){p=1;render();return}let t0=null;const f=ts=>{if(t0==null)t0=ts;p=Math.min(1,(ts-t0)/2000);render();if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f)};
+ new ResizeObserver(size).observe(cv);size();
+ new IntersectionObserver((e,o)=>{if(e[0].isIntersecting){run();o.disconnect()}},{threshold:.25}).observe(cv);
+ cv.addEventListener('pointermove',e=>{const r=cv.getBoundingClientRect();hv={x:e.clientX-r.left,y:e.clientY-r.top};if(p>=1)render()});
+ cv.addEventListener('pointerleave',()=>{hv=null;if(p>=1)render()});
+ all.push(render);
+}
+mount('cv-painel',1.2,painel);mount('cv-relatorio',1.2,relatorio);
+const redraw=()=>all.forEach(r=>r());
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change',redraw);
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(redraw);
+})();
+</script>
+</body></html>
