@@ -12,12 +12,5 @@ acompanhar a equipe com números e apoiar decisões de gestão.
 - **Indicadores:** rotatividade, absenteísmo, tempo de contratação e custo por contratação.
 - **Base:** cursos de People Analytics Aplicado ao RH (Udemy) e Excel (SENAI).
 
-## Como publicar na Vercel (sem programar)
-1. No GitHub, crie um repositório novo e envie estes arquivos (botão **Add file → Upload files**).
-2. Em [vercel.com](https://vercel.com), clique em **Add New → Project** e escolha este repositório.
-3. Deixe tudo como está e clique em **Deploy**. Em alguns segundos o site estará no ar.
-
-Para atualizar, troque os arquivos no GitHub e a Vercel publica de novo sozinha.
-
 ## Autor
 [Fernando Henrique Almeida Dias](https://www.linkedin.com/in/fernando-hnerique-50b21b299)
